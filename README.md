@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | Context | Personal Claude Code plugin collection bundling dev workflow and GCP infrastructure skills |
-| Classification | Independent - Dave Braendler owned |
+| Classification | 100% Blue Harbour IP |
 | Users | Dave Braendler — used across all Claude Code sessions via marketplace install |
 | Commercial Value | Productivity multiplier across all dev work, codifying repeatable workflows into reusable skills |
 | Status Notes | Active. Three plugins, five skills shipped. Two legacy tools parked in `to-migrate/` awaiting rethinking |
@@ -15,10 +15,10 @@
 Dave's personal Claude Code plugin collection. A marketplace package bundling multiple plugins that add skills for development workflows, cloud infrastructure management, and proposal generation. Installed globally across all Claude Code sessions.
 
 ## Venture
-Personal
+Blue Harbour
 
 ## Classification
-Independent - Dave Braendler owned
+100% Blue Harbour IP
 
 ## Status
 Active

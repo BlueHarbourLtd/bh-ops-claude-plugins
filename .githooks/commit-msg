@@ -1,0 +1,66 @@
+#!/bin/sh
+# commit-msg — keep AI co-authorship trailers out of commit messages.
+#
+# 🔴 THIS IS commit-msg, NOT pre-commit, AND THAT IS NOT A STYLE CHOICE. `pre-commit` runs before
+# the message exists and is never given it — a check for a trailer placed there inspects nothing
+# and passes every time, which is the worst kind of guard: one that reports green because it is
+# looking at the wrong thing. `commit-msg` receives the path to the message file as $1.
+#
+# WHY. As at 2026-10-02 roughly 9,400 commits across the estate carry a `Co-Authored-By: Claude`
+# trailer. Dave's decision that day was to STOP ADDING IT, and to leave the existing history
+# untouched: removing it would rewrite every SHA in 43 repos, and in a diligence pass "the AI
+# attribution was stripped from 9,400 commits" reads far worse than the disclosure it removed.
+# The primary control is `attribution: {commit: "", pr: ""}` in the global Claude Code settings.
+# This hook is the second line, because a setting lives on one machine and is one `npm`-less
+# clone, one fresh laptop or one changed default away from quietly coming back.
+#
+# 🔴 A REVERT IS EXEMPT, AND IT HAS TO BE. `git revert` copies the ORIGINAL commit's message into
+# the new one, and ~9,400 of those originals carry the trailer. Without this exemption, reverting
+# any commit from before today fails, the author reaches for --no-verify, and from then on the
+# hook is something to be got around rather than something that holds.
+#
+# Bypass is `git commit --no-verify`, as always. If you find yourself using it for this, the
+# question to ask is why the trailer is being added at all — the setting is the fix, not the flag.
+
+msg_file="$1"
+[ -n "$msg_file" ] || exit 0
+[ -f "$msg_file" ] || exit 0
+
+# Git strips comment lines before using the message; strip them here too so a commented-out
+# example in a template is not read as the real thing.
+body=$(grep -v '^#' "$msg_file" 2>/dev/null)
+
+# A revert quotes history verbatim. Let it through.
+if printf '%s\n' "$body" | grep -q '^This reverts commit'; then
+  exit 0
+fi
+
+fail=0
+
+if printf '%s\n' "$body" | grep -qiE '^[[:space:]]*Co-Authored-By:[[:space:]]*Claude'; then
+  echo "BLOCKED: this commit message carries a Co-Authored-By: Claude trailer."
+  printf '%s\n' "$body" | grep -niE '^[[:space:]]*Co-Authored-By:[[:space:]]*Claude' | sed 's/^/  /'
+  fail=1
+fi
+
+if printf '%s\n' "$body" | grep -qiE 'Generated with \[?Claude Code'; then
+  echo "BLOCKED: this commit message carries a 'Generated with Claude Code' line."
+  printf '%s\n' "$body" | grep -niE 'Generated with \[?Claude Code' | sed 's/^/  /'
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo ""
+  echo "  Blue Harbour stopped adding AI co-authorship trailers on 2026-10-02."
+  echo "  Existing history keeps its trailers deliberately and is not rewritten."
+  echo ""
+  echo "  If this came back on its own, the SETTING is what regressed, not this"
+  echo "  message. Check \"attribution\" in ~/.claude/settings.json:"
+  echo ""
+  echo '      "attribution": { "commit": "", "pr": "", "sessionUrl": false }'
+  echo ""
+  echo "  Then remove the trailer from the message and commit again."
+  exit 1
+fi
+
+exit 0

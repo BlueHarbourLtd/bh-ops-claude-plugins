@@ -10,6 +10,7 @@
 | Commercial Value | Productivity multiplier across all dev work, codifying repeatable workflows into reusable skills |
 | Status Notes | Active. Three plugins, five skills shipped. Two legacy tools parked in `to-migrate/` awaiting rethinking |
 | Languages | Markdown, JavaScript, Shell |
+| Code Quality | Not audited |
 
 ## Overview
 Dave's personal Claude Code plugin collection. A marketplace package bundling multiple plugins that add skills for development workflows, cloud infrastructure management, and proposal generation. Installed globally across all Claude Code sessions.

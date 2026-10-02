@@ -15,19 +15,14 @@ This repository is publicly readable. Public readability is NOT a licence. See
 LICENSE: no right to copy, modify, redistribute or reuse this material is
 granted by the ability to read it.
 
-Provenance
-----------
-A substantial proportion of the material in this repository was produced with
-AI assistance. Where a commit was made with such assistance that is recorded in
-the commit's `Co-Authored-By` trailer, which forms part of the permanent git
-history of this repository.
+Provenance and protection
+-------------------------
+This repository was developed using AI-assisted tooling as part of Blue Harbour's
+development process.
 
-This is a deliberate disclosure. The copyright status of material generated
-without human authorship is unsettled in New Zealand and Australia, and has
-been decided against protection in the United States. The owner named above
-therefore relies on confidentiality, on contract, and on the written agreements
-governing access to this repository as the primary protection of this material,
-and does not rely on copyright alone.
+The owner named above relies on confidentiality, on contract, and on the written
+agreements governing access to this repository as the primary protections of this
+material, together with such copyright and other rights as subsist in it.
 
 Ownership register
 ------------------

@@ -8,17 +8,12 @@
     {
       "name": "dev",
       "source": "./plugins/dev",
-      "description": "Development skills — spec writing, code scanning"
+      "description": "Development skills \u2014 spec writing, code scanning"
     },
     {
       "name": "gcloud-tools",
       "source": "./plugins/gcloud-tools",
       "description": "Google Cloud deployment and cost management"
-    },
-    {
-      "name": "proposal",
-      "source": "./plugins/proposal",
-      "description": "Blue Harbour proposal generator"
     }
   ]
 }

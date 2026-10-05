@@ -1,6 +1,0 @@
-{
-  "name": "proposal",
-  "version": "1.0.0",
-  "description": "Blue Harbour workshop proposal generator — creates professional .docx proposals from structured parameters",
-  "skills": "./skills/"
-}
